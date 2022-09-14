@@ -20,10 +20,7 @@
                         $post_image = $row['post_image'];
                         $post_content = substr($row['post_content'],0,500);  
                         $post_status = $row['post_status'];
-                        if($post_status !== 'published'){
-                            echo "<h1 class='text-center'> no post sorry</h1>";
-                        }else{
-
+                        if($post_status == 'published'){
                 ?>
                 <h1 class="page-header">
                     Page Heading
