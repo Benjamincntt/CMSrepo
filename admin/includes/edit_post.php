@@ -58,33 +58,44 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
         <label for="title">Post Title</label>
         <input value="<?php echo $post_title;?>" type="text" class="form-control" name="title">
     </div>
+    <div class="row">   
+        <div class="form-group col-lg-2">
+            <label for="title">Post Category</label>
+            <select class="form-control" name="post_category" id="">
+                <?php
+                    $query = "SELECT * FROM categories";
+                    $select_categories = mysqli_query($connection, $query);
+                    confirmQuery($select_categories);
 
-    <div class="form-group">
-        <select name="post_category" id="">
-            <?php
-                $query = "SELECT * FROM categories";
-                $select_categories = mysqli_query($connection, $query);
-                confirmQuery($select_categories);
-
-                while($row = mysqli_fetch_assoc($select_categories)){
-                    $cat_id = $row['cat_id'];
-                    $cat_title = $row['cat_title'];   
-                    echo "<option value='{$cat_id}'>{$cat_title}</option>";
-                }
-            ?>
-            
-        </select>
+                    while($row = mysqli_fetch_assoc($select_categories)){
+                        $cat_id = $row['cat_id'];
+                        $cat_title = $row['cat_title'];   
+                        echo "<option value='{$cat_id}'>{$cat_title}</option>";
+                    }
+                ?>
+                
+            </select>
+        </div>
+        <div class="form-group col-lg-2">
+            <label for="title">Post Status</label>
+            <select class="form-control" name="post_status" id="">
+                <option value='<?php echo $post_status;?>'><?php echo $post_status;?></option>
+                <?php
+                    if($post_status == 'published'){
+                        echo "<option value='draft'>draft</option>";
+                    }else{
+                        echo "<option value='published'>published</option>";
+                    }
+                ?>
+            </select>
+        </div> 
     </div>
-
     <div class="form-group">
         <label for="post_author">Post Author</label>
         <input value="<?php echo $post_author;?>" type="text" class="form-control" name="author">
     </div>
-
-    <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input value="<?php echo $post_status;?>" type="text" class="form-control" name="post_status">
-    </div>
+    
+       
 
     <div class="form-group">
         <img width=200px src="../images/<?php echo $post_image;?>" alt="">
