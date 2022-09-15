@@ -50,7 +50,7 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
         $query .="WHERE post_id = {$the_post_id} ";
         $update_post = mysqli_query($connection,$query);
         confirmQuery($update_post);
-        header("Location: posts.php");
+        echo "<p class='bg-success'>Post Update<a href='../post.php?p_id={$the_post_id}'>View Posts</a> or <a href='posts.php'>Edit more posts</a></p>";
     }
 ?>
 <form action="" method="post" enctype="multipart/form-data">
@@ -109,8 +109,8 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea type="text" class="form-control" name="post_content" id="" cols="30" rows="10">
-        <?php echo $post_content;?>"
+        <textarea type="text" class="form-control" name="post_content" id="summernote" cols="30" rows="10">
+        <?php echo $post_content;?>
         </textarea>
     </div>
 
