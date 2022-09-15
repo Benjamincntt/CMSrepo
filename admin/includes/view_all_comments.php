@@ -53,12 +53,12 @@
                     </tbody>
                     </table>
                     <?php
-                            if(isset($_GET['approved'])){
-                                $the_comment_id = $_GET['approved'];
-                                $query = "UPDATE comments set comment_status= 'approved' WHERE comment_id = {$the_comment_id}";
-                                $approved_comment_query = mysqli_query($connection, $query);
-                                header("Location: comments.php");
-                            }
+                        if(isset($_GET['approved'])){
+                            $the_comment_id = $_GET['approved'];
+                            $query = "UPDATE comments set comment_status= 'approved' WHERE comment_id = {$the_comment_id}";
+                            $approved_comment_query = mysqli_query($connection, $query);
+                            header("Location: comments.php");
+                        }
 
                         if(isset($_GET['unapproved'])){
                             $the_comment_id = $_GET['unapproved'];

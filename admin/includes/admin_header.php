@@ -5,8 +5,9 @@
     if(isset($_SESSION['user_role'])){
         if($_SESSION['user_role'] !=='Admin'){
             header("Location: ../index.php");
-
         }
+    }else{
+        header("Location: ../index.php");
     }
 
 ?>
@@ -24,10 +25,10 @@
     <meta name="author" content="">
 
     <title>SB Admin - Bootstrap Admin Template</title>
-
+    
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-
+    
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
 
@@ -41,8 +42,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
+    <!-- <link href="../css/summernote.css"  rel="stylesheet"> -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    
 </head>
 
 <body>
