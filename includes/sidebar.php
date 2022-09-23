@@ -18,7 +18,7 @@
                 </div>
                         <!-- login -->
                 <div class="well">
-                    <h4>Blog Search</h4>
+                    <h4>Login</h4>
                     <form action="includes/login.php" method="POST" >
                         <div class="form-group">
                             <input type="text" id="username" name="username" placeholder="Tài khoản" class="form-control"/>
