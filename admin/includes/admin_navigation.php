@@ -69,7 +69,7 @@
                                 <a href="users.php">View all users</a>
                             </li>
                             <li>
-                                <a href="users.php?source=add_user">Edit users</a>
+                                <a href="users.php?source=add_user">Add users</a>
                             </li>
                         </ul>
                     </li>
