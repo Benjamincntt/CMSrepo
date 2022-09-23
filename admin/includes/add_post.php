@@ -17,10 +17,8 @@ if(isset($_POST['create_post'])){
     $create_post_query = mysqli_query($connection, $query);
     
     confirmQuery($create_post_query);
-
-
-    //how to get current id and current source
-    //echo "<p class='bg-success'>Post Created<a href='../post.php?p_id={$the_post_id}'>View Posts</a> or <a href='posts.php?source=add_post'>Add more posts</a></p>";
+    $the_post_id = mysqli_insert_id($connection);
+    echo "<p class='bg-success'>Post Created  <a href='../post.php?p_id={$the_post_id}'>View Post</a> or <a href='posts.php?source=add_post'>Add more posts</a></p>";
 
 }
 ?>

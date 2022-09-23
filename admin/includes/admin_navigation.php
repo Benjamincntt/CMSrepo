@@ -15,7 +15,13 @@
 
                 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>
+                    <?php
+                    if(isset($_SESSION['username'])){
+                        echo $_SESSION['username'];
+                    }
+                    ?>
+                    <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -63,7 +69,7 @@
                                 <a href="users.php">View all users</a>
                             </li>
                             <li>
-                                <a href="users.php?source=add_user">Edit users</a>
+                                <a href="users.php?source=add_user">Add users</a>
                             </li>
                         </ul>
                     </li>
