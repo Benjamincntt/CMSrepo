@@ -12,6 +12,7 @@ if(isset($_POST['login'])){
         die("query failed" );
     }
     while($row = mysqli_fetch_array($select_user_query)){
+        
        $db_id = $row['user_id'];
        $db_username = $row['user_name'];
        $db_password = $row['user_password'];
@@ -29,6 +30,7 @@ if(isset($_POST['login'])){
         $_SESSION['user_role'] = $db_role;
         header("Location: ../admin");
     }else{
+        echo $password;
         header("Location: ../index.php");
     }
 }
