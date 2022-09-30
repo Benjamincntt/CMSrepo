@@ -13,6 +13,12 @@
                 if(isset($_GET['p_id'])){
                     $the_post_id = $_GET['p_id'];
                 }
+
+                $view_query = "UPDATE posts set post_view_count = post_view_count + 1 WHERE post_id = $the_post_id ";
+                $send_query = mysqli_query($connection,$view_query);
+                if(!$send_query){
+                    die("QUERY FAILED");
+                }
                 $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
                 $select_all_posts_query = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_all_posts_query)){
@@ -23,15 +29,12 @@
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];                
                 ?>
-                <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                </h1>
+
 
                 <!-- First Blog Post -->
-                <h2>
-                    <a href="post.php?p_id=<?php echo $post_id; ?>"><?php echo $post_title?></a>
-                </h2>
+                <h1 class="page-header>
+                    <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_title?></a>
+                </h1>
                 <p class="lead">
                     by <a href="index.php"><?php echo $post_author?></a>
                 </p>
@@ -63,6 +66,7 @@
                         $query = "UPDATE posts set post_comment_count = post_comment_count + 1 ";
                         $query .= "WHERE post_id = $the_post_id ";
                         $update_comment_count = mysqli_query($connection,$query);
+                        //215 redirect(location:"/cmsPHP/post.php?p_id=$the_post_id");
                     }else{
                         echo "<script>alert('Fields cannot be empty ')</script>" ;  
                     }

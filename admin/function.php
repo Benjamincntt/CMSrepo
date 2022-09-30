@@ -48,4 +48,7 @@ function deleteCategories(){
         header("Location: categories.php");
     }
 }
+function redirect($location){
+    return header(header:"Location" . $location);
+}
 ?>

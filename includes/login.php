@@ -12,6 +12,7 @@ if(isset($_POST['login'])){
         die("query failed" );
     }
     while($row = mysqli_fetch_array($select_user_query)){
+        
        $db_id = $row['user_id'];
        $db_username = $row['user_name'];
        $db_password = $row['user_password'];
