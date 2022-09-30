@@ -40,9 +40,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                //find all categories query
+                                
                                 <?php findAllCategories();?>
-                                //delete category
+                               
                                 <?php deleteCategories();?>
                                 </tbody>
                             </table>

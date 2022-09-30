@@ -42,8 +42,10 @@ if(isset($_POST['create_post'])){
         <label for="post_status">Post Status</label>
         <select class="form-control" name="post_status" id="" style="width:25%">
             <option value="">Post Status</option>
-            <option value="published">Publish</option>
-            <option value="draft">Draft</option>  
+            <option value="Published">Publish</option>
+            <option value="Draft">Draft</option>  
+            <option value="Delete">Delete</option>  
+            <option value="Clone">Clone</option>  
         </select>
         
     </div>
