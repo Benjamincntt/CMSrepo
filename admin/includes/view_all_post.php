@@ -50,9 +50,9 @@
     <div id="bulkOptionContainer" class="col-xs-3">
         <select class="form-control" name="bulk_options" id="">
             <option value="">Select Options</option>
-            <option value="published">Publish</option>
-            <option value="draft">Draft</option>
-            <option value="delete">Delete</option>
+            <option value="Published">Publish</option>
+            <option value="Draft">Draft</option>
+            <option value="Delete">Delete</option>
             <option value="Clone">Clone</option> 
         </select>     
     </div>
