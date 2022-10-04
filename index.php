@@ -45,7 +45,6 @@
                 ?>
 
                 <!-- First Blog Post -->
-                <h1><?php echo $count; ?></h1>
                 <h1 class="page-header">
                 <a href="post.php?p_id=<?php echo $post_id;?>"><?php echo $post_title?></a>
                 </h1>
