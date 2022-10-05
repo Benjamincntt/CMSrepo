@@ -12,7 +12,6 @@
             $user_firstname = $row['user_firstname'];
             $user_lastname = $row['user_lastname'];
             $user_email = $row['user_email'];
-            $user_role = $row['user_role'];
 
         }
     }
@@ -24,15 +23,24 @@
         $user_lastname = $_POST['user_lastname'];
         $user_email = $_POST['user_email'];
         $user_password = $_POST['user_password'];
-        $user_role = $_POST['user_role'];
+
+
+        $query_password = "SELECT user_password FROM users WHERE user_name = '{$username}'";
+        $get_user_query = mysqli_query($connection,$query_password);
+        confirmQuery($get_user_query);
+        $row = mysqli_fetch_array($get_user_query);
+        $db_user_password = $row['user_password'];
+            if($db_user_password!= $user_password){
+                $hashed_password = password_hash($user_password,PASSWORD_BCRYPT,array('cost'=>12));
+            }
+
 
         $query = "UPDATE users SET ";
         $query .="user_name   = '{$user_name}', ";
-        $query .="user_password = '{$user_password}', ";
+        $query .="user_password = '{$hashed_password}', ";
         $query .="user_firstname  = '{$user_firstname}', ";
         $query .="user_lastname  = '{$user_lastname}', ";
-        $query .="user_email  = '{$user_email}', ";
-        $query .="user_role    = '{$user_role}' ";
+        $query .="user_email  = '{$user_email}' ";
         $query .="WHERE user_name = '{$username}' ";
         $update_user = mysqli_query($connection,$query);
         confirmQuery($update_user);
@@ -64,18 +72,7 @@
                                 <input type="text" class="form-control" name="user_lastname"value="<?php echo $user_lastname;?>">
                             </div>
 
-                            <div class="form-group">
-                                <select name="user_role" id="">
-                                    <option value="subscriber"><?php echo $user_role;?></option>
-                                    <?php
-                                    if($user_role == 'Admin'){
-                                        echo "<option value='subscriber'>Subscriber</option>";
-                                    }else{
-                                        echo "<option value='admin'>Admin</option>";
-                                    }
-                                    ?>
-                                </select>
-                            </div>
+                           
 
                             <div class="form-group">
                                 <label for="user_name">User name</label>
@@ -89,7 +86,7 @@
 
                             <div class="form-group">
                                 <label for="user_password">Password</label>
-                                <input type="text" class="form-control" name="user_password" value="<?php echo $user_password;?>">
+                                <input autocomplete="off" type="text" class="form-control" name="user_password">
                             </div>
                             
                             <div class="form-group">
