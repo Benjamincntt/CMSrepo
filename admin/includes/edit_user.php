@@ -31,7 +31,6 @@ if(isset($_GET['user_id'])){
         $db_user_password = $row['user_password'];
             if($db_user_password!= $user_password){
                 $hashed_password = password_hash($user_password,PASSWORD_BCRYPT,array('cost'=>12));
-
             }
         $query = "UPDATE users SET ";
         $query .="user_firstname  = '{$user_firstname}', ";
