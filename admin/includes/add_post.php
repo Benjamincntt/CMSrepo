@@ -29,17 +29,43 @@ if(isset($_POST['create_post'])){
     </div>
 
     <div class="form-group">
-        <label for="post_category">Post Category Id</label>
-        <input type="text" class="form-control" name="post_category_id">
+        <label for="post_category">Category</label>
+        <select class="form-control" id="" style="width:25%" name="post_category" id="">
+            <?php
+                $cat_query = "SELECT * FROM categories";
+                $select_categories = mysqli_query($connection, $cat_query);
+                confirmQuery($select_categories);
+                while($row = mysqli_fetch_assoc($select_categories)){
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
+                    echo "<option value='$cat_id'>{$cat_title}</option>";
+                }
+            ?>
+        </select>
     </div>
 
-    <div class="form-group">
+    <!-- <div class="form-group">
         <label for="post_author">Post Author</label>
         <input type="text" class="form-control" name="author">
+    </div> -->
+    <div class="form-group">
+        <label for="post_category">Users:</label>
+        <select class="form-control" id="" style="width:25%" name="post_category" id="">
+            <?php
+                $user_query = "SELECT * FROM users";
+                $select_users = mysqli_query($connection, $user_query);
+                confirmQuery($select_users);
+                while($row = mysqli_fetch_assoc($select_users)){
+                    $user_id = $row['user_id'];
+                    $user_name = $row['user_name'];
+                    echo "<option value='$user_id'>{$user_name}</option>";
+                }
+            ?>
+        </select>
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
+        <label for="post_status">Post Status:</label>
         <select class="form-control" name="post_status" id="" style="width:25%">
             <option value="">Post Status</option>
             <option value="Published">Publish</option>
