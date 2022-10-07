@@ -2,7 +2,8 @@
 if(isset($_POST['create_post'])){
     $post_title = $_POST['title'];
     $post_category_id = $_POST['post_category_id'];
-    $post_author = $_POST['author'];
+    $post_author = $_POST['post_author'];
+    $post_user = $_POST['post_user'];
     $post_status = $_POST['post_status'];
 
     $post_image = $_FILES['image']['name'];
@@ -12,8 +13,15 @@ if(isset($_POST['create_post'])){
     $post_date = date('d-m-y');
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
-    $query ="INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
-    $query .="VALUES({$post_category_id},'{$post_title}','{$post_author}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
+    $post_title = mysqli_real_escape_string($connection,$post_title);
+    $post_user = mysqli_real_escape_string($connection,$post_user);
+    $post_author = mysqli_real_escape_string($connection,$post_author);
+    $post_status = mysqli_real_escape_string($connection,$post_status);
+    $post_tags = mysqli_real_escape_string($connection,$post_tags);
+    $post_content = mysqli_real_escape_string($connection,$post_content);
+
+    $query ="INSERT INTO posts(post_category_id, post_title,post_author, post_user, post_date, post_image, post_content, post_tags, post_status) ";
+    $query .="VALUES({$post_category_id},'{$post_title}','{$post_author}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";
     $create_post_query = mysqli_query($connection, $query);
     
     confirmQuery($create_post_query);
@@ -29,17 +37,43 @@ if(isset($_POST['create_post'])){
     </div>
 
     <div class="form-group">
-        <label for="post_category">Post Category Id</label>
-        <input type="text" class="form-control" name="post_category_id">
+        <label for="post_category">Category</label>
+        <select class="form-control" id="" style="width:25%" name="post_category_id" id="">
+            <?php
+                $cat_query = "SELECT * FROM categories";
+                $select_categories = mysqli_query($connection, $cat_query);
+                confirmQuery($select_categories);
+                while($row = mysqli_fetch_assoc($select_categories)){
+                    $cat_id = $row['cat_id'];
+                    $cat_title = $row['cat_title'];
+                    echo "<option value='$cat_id'>{$cat_title}</option>";
+                }
+            ?>
+        </select>
     </div>
 
     <div class="form-group">
         <label for="post_author">Post Author</label>
-        <input type="text" class="form-control" name="author">
+        <input type="text" class="form-control" style="width:25%" name="post_author">
+    </div>
+    <div class="form-group">
+        <label for="post_user">Users:</label>
+        <select class="form-control" id="" style="width:25%" name="post_user" id="">
+            <?php
+                $user_query = "SELECT * FROM users";
+                $select_users = mysqli_query($connection, $user_query);
+                confirmQuery($select_users);
+                while($row = mysqli_fetch_assoc($select_users)){
+                    $user_id = $row['user_id'];
+                    $user_name = $row['user_name'];
+                    echo "<option value='{$user_name}'>{$user_name}</option>";
+                }
+            ?>
+        </select>
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
+        <label for="post_status">Post Status:</label>
         <select class="form-control" name="post_status" id="" style="width:25%">
             <option value="">Post Status</option>
             <option value="Published">Publish</option>

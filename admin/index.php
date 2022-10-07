@@ -130,7 +130,7 @@
                 </div>
                 <!-- /.row -->
                 <?php 
-                    $query = "SELECT * FROM posts WHERE post_status = 'published'";
+                    $query = "SELECT * FROM posts WHERE post_status = 'Published'";
                     $select_all_publish_post = mysqli_query($connection,$query);
                     $post_published_count = mysqli_num_rows($select_all_publish_post);
 

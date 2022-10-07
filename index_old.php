@@ -20,7 +20,7 @@
                         $post_image = $row['post_image'];
                         $post_content = substr($row['post_content'],0,500);  
                         $post_status = $row['post_status'];
-                        if($post_status == 'published'){
+                        if($post_status == 'Published'){
                 ?>
                 <h1 class="page-header">
                     Page Heading
