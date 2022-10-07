@@ -8,7 +8,7 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
     $select_posts = mysqli_query($connection, $query); 
     while($row = mysqli_fetch_assoc($select_posts)){
         $post_id = $row['post_id'];
-        $post_author = $row['post_author'];
+        $post_user = $row['post_user'];
         $post_title = $row['post_title'];
         $post_category_id = $row['post_category_id'];
         $post_status = $row['post_status'];
@@ -20,7 +20,7 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
     }
 }
     if(isset($_POST['update_post'])){
-        $post_author = $_POST['author'];
+        $post_user = $_POST['post_user'];
         $post_title = $_POST['title'];
         $post_category_id = $_POST['post_category'];
         $post_status = $_POST['post_status'];
@@ -37,12 +37,16 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
                 $post_image = $row['post_image'];
             }
         }
-
+        $post_title = mysqli_real_escape_string($connection,$post_title);
+        $post_user = mysqli_real_escape_string($connection,$post_user);
+        $post_status = mysqli_real_escape_string($connection,$post_status);
+        $post_tags = mysqli_real_escape_string($connection,$post_tags);
+        $post_content = mysqli_real_escape_string($connection,$post_content);
         $query = "UPDATE posts SET ";
         $query .="post_title   = '{$post_title}', ";
         $query .="post_category_id = '{$post_category_id}', ";
         $query .="post_date    = now(), ";
-        $query .="post_author  = '{$post_author}', ";
+        $query .="post_user  = '{$post_user}', ";
         $query .="post_status  = '{$post_status}', ";
         $query .="post_tags    = '{$post_tags}', ";
         $query .="post_content = '{$post_content}', ";
@@ -58,10 +62,10 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
         <label for="title">Post Title</label>
         <input value="<?php echo $post_title;?>" type="text" class="form-control" name="title">
     </div>
-    <div class="row">   
-        <div class="form-group col-lg-2">
-            <label for="title">Post Category</label>
-            <select class="form-control" name="post_category" id="">
+  
+        <div class="form-group ">
+            <label for="category">Category</label>
+            <select class="form-control" style="width:25%" name="post_category" id="">
                 <?php
                     $query = "SELECT * FROM categories";
                     $select_categories = mysqli_query($connection, $query);
@@ -76,26 +80,35 @@ $query = "SELECT * FROM posts WHERE post_id = $the_post_id";
                 
             </select>
         </div>
-        <div class="form-group col-lg-2">
-            <label for="title">Post Status</label>
-            <select class="form-control" name="post_status" id="">
+        <div class="form-group">
+            <label for="post_user">Users</label>
+            <select class="form-control" id="" style="width:25%" name="post_user" id="">
+                <?php
+                    echo "<option value='{$post_user}'>{$post_user}</option>";
+                    $user_query = "SELECT * FROM users";
+                    $select_users = mysqli_query($connection, $user_query);
+                    confirmQuery($select_users);
+                    while($row = mysqli_fetch_assoc($select_users)){
+                        $user_id = $row['user_id'];
+                        $user_name = $row['user_name'];
+                        echo "<option value='{$user_name}'>{$user_name}</option>";
+                    }
+                ?>
+            </select>
+        </div>
+        <div class="form-group ">
+            <label for="Status">Post Status</label>
+            <select class="form-control" style="width:25%" name="post_status" id="">
                 <option value='<?php echo $post_status;?>'><?php echo $post_status;?></option>
                 <?php
-                    if($post_status == 'published'){
-                        echo "<option value='draft'>draft</option>";
+                    if($post_status == 'Published'){
+                        echo "<option value='Draft'>Draft</option>";
                     }else{
-                        echo "<option value='published'>published</option>";
+                        echo "<option value='Published'>Published</option>";
                     }
                 ?>
             </select>
         </div> 
-    </div>
-    <div class="form-group">
-        <label for="post_author">Post Author</label>
-        <input value="<?php echo $post_author;?>" type="text" class="form-control" name="author">
-    </div>
-    
-       
 
     <div class="form-group">
         <img width=200px src="../images/<?php echo $post_image;?>" alt="">

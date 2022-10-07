@@ -12,25 +12,27 @@
                 <?php
                 if(isset($_GET['p_id'])){
                     $the_post_id = $_GET['p_id'];
-                    $the_post_author = $_GET['author'];
                 }
-                $query = "SELECT * FROM posts WHERE post_author = '{$the_post_author}' ";
+                if(isset($_GET['user'])){
+                    $the_post_user = $_GET['user'];
+                }
+                $query = "SELECT DISTINCT * FROM posts WHERE post_user = '{$the_post_user}' ";
                 $select_all_posts_query = mysqli_query($connection, $query);
                     while($row = mysqli_fetch_assoc($select_all_posts_query)){
                         $post_id = $row['post_id'];
                         $post_title = $row['post_title'];
-                        $post_author = $row['post_author'];
+                        $post_user = $row['post_user'];
                         $post_date = $row['post_date'];
                         $post_image = $row['post_image'];
                         $post_content = $row['post_content'];                
                 ?>
 
                 <!-- First Blog Post -->
-                <h1 class="page-header">
+                <h1 class="article-title">
                     <a href="#"><?php echo $post_title?></a>
                 </h1>
                 <p class="lead">
-                    Post by <?php echo $post_author?></a>
+                    Post by <?php echo $post_user?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date?></p>
                 <hr>
