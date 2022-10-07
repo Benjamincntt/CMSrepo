@@ -1,13 +1,14 @@
 <?php
 if(isset($_POST['create_user'])){
-    $user_name = $_POST['user_name'];
-    $user_firstname= $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $user_email = $_POST['user_email'];
-    $user_password = $_POST['user_password'];
+    $user_name = escape($_POST['user_name']);
+    $user_firstname= escape($_POST['user_firstname']);
+    $user_lastname = escape($_POST['user_lastname']);
+    $user_email = escape($_POST['user_email']);
+    $user_password = hash_password(escape($_POST['user_password']));
+
     // $user_image = $_FILES['image']['name'];
     // $user_image_temp = $_FILES['image']['tmp_name'];
-    $user_role = $_POST['user_role'];
+    $user_role = escape($_POST['user_role']);
 
     // move_uploaded_file($user_image_temp, "../images/$user_image");
 
@@ -32,9 +33,9 @@ if(isset($_POST['create_user'])){
 
     <div class="form-group">
         <select name="user_role" id="">
-            <option value="admin">Select Option</option>
-            <option value="admin">Admin</option>
-            <option value="subscriber">Subscriber</option>
+            <option value="Admin">Select Option</option>
+            <option value="Admin">Admin</option>
+            <option value="Subscriber">Subscriber</option>
         </select>
     </div>
 

@@ -1,24 +1,17 @@
 <?php
 if(isset($_POST['create_post'])){
-    $post_title = $_POST['title'];
+    $post_title = escape($_POST['title']);
     $post_category_id = $_POST['post_category_id'];
-    $post_author = $_POST['post_author'];
-    $post_user = $_POST['post_user'];
-    $post_status = $_POST['post_status'];
+    $post_author = escape($_POST['post_author']);
+    $post_user = escape($_POST['post_user']);
+    $post_status = escape($_POST['post_status']);
 
     $post_image = $_FILES['image']['name'];
     $post_image_temp = $_FILES['image']['tmp_name'];
-    $post_tags = $_POST['post_tags'];
-    $post_content = $_POST['post_content'];
+    $post_tags = escape($_POST['post_tags']);
+    $post_content = escape($_POST['post_content']);
     $post_date = date('d-m-y');
     move_uploaded_file($post_image_temp, "../images/$post_image");
-
-    $post_title = mysqli_real_escape_string($connection,$post_title);
-    $post_user = mysqli_real_escape_string($connection,$post_user);
-    $post_author = mysqli_real_escape_string($connection,$post_author);
-    $post_status = mysqli_real_escape_string($connection,$post_status);
-    $post_tags = mysqli_real_escape_string($connection,$post_tags);
-    $post_content = mysqli_real_escape_string($connection,$post_content);
 
     $query ="INSERT INTO posts(post_category_id, post_title,post_author, post_user, post_date, post_image, post_content, post_tags, post_status) ";
     $query .="VALUES({$post_category_id},'{$post_title}','{$post_author}','{$post_user}',now(),'{$post_image}','{$post_content}','{$post_tags}','{$post_status}')";

@@ -29,9 +29,7 @@ if(isset($_GET['user_id'])){
         confirmQuery($get_user_query);
         $row = mysqli_fetch_array($get_user_query);
         $db_user_password = $row['user_password'];
-
-                $hashed_password = password_hash($user_password,PASSWORD_BCRYPT,array('cost'=>12));
-
+        $hashed_password = hash_password($user_password);
         $query = "UPDATE users SET ";
         $query .="user_firstname  = '{$user_firstname}', ";
         $query .="user_lastname  = '{$user_lastname}', ";

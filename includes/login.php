@@ -6,6 +6,7 @@ if(isset($_POST['login'])){
     $password = $_POST['password'];
     $username = mysqli_real_escape_string($connection,$username);
     $password = mysqli_real_escape_string($connection,$password);
+
     $query = "SELECT * FROM users WHERE user_name = '{$username}' ";
     $select_user_query =  mysqli_query($connection, $query);
     if(!$select_user_query){
@@ -18,13 +19,11 @@ if(isset($_POST['login'])){
        $db_password = $row['user_password'];
        $db_firstname = $row['user_firstname'];
        $db_lastname = $row['user_lastname'];
-       $db_role = $row['user_role'];
+       $db_role = $row['user_role']; 
     }
 
-    if($username === $db_username && password_verify($password, $db_password)){
+    if($username === $db_username && password_verify($password, $db_password)==true){
         $_SESSION['username'] = $db_username;      
-        $_SESSION['firstname'] = $db_firstname;
-        $_SESSION['lastname'] = $db_lastname;
         $_SESSION['user_role'] = $db_role;
         header("Location: ../admin");
     }else{

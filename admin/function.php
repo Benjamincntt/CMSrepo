@@ -1,4 +1,13 @@
 <?php
+function escape($string){
+    global $connection;
+    return mysqli_real_escape_string($connection, trim(strip_tags($string)));
+}
+
+
+function hash_password($string){
+    return password_hash($string,PASSWORD_BCRYPT,array('cost'=>14));
+}
 
 function confirmQuery($result){
     global $connection;
