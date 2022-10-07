@@ -19,11 +19,9 @@ if(isset($_POST['login'])){
        $db_firstname = $row['user_firstname'];
        $db_lastname = $row['user_lastname'];
        $db_role = $row['user_role'];
-       $salt = $row['randSalt'];
     }
-    $password = crypt($password, $salt);
 
-    if($username === $db_username && $password === $db_password){
+    if($username === $db_username && password_verify($password, $db_password)){
         $_SESSION['username'] = $db_username;      
         $_SESSION['firstname'] = $db_firstname;
         $_SESSION['lastname'] = $db_lastname;
@@ -31,6 +29,6 @@ if(isset($_POST['login'])){
         header("Location: ../admin");
     }else{
         header("Location: ../index.php");
+        }
     }
-}
 ?>
